@@ -1,6 +1,6 @@
 #pragma once
 
-#include "stdafx.h"
+#include <SDL.h>
 #include "Window.h"
 
 class CMain

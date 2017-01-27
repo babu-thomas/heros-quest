@@ -1,5 +1,8 @@
-#include "stdafx.h"
+#include <iostream>
+#include <SDL_image.h>
 #include "Main.h"
+
+using namespace std;
 
 
 

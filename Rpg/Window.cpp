@@ -1,7 +1,7 @@
-#include "stdafx.h"
+#include <iostream>
 #include "Window.h"
 
-
+using namespace std;
 
 Window::Window() : window(nullptr), renderer(nullptr)
 {
