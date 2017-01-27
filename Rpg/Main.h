@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "Window.h"
+#include "Sprite.h"
 
 class CMain
 {
@@ -14,10 +15,8 @@ public:
 private:
 	bool quit;
 	Window *window;
-	SDL_Texture *grass_image;
-	SDL_Rect grass_rect;
-	SDL_Texture *bob_image;
-	SDL_Rect bob_rect;
+	Sprite *grass;
+	Sprite *bob;
 	SDL_Event *main_event;
 };
 

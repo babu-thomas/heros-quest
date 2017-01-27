@@ -10,8 +10,8 @@ Window::Window() : window(nullptr), renderer(nullptr)
 
 Window::~Window()
 {
-	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
 }
 
 void Window::init(bool *quit)
