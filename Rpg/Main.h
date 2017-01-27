@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "Window.h"
 
 class CMain
 {
@@ -12,12 +13,11 @@ public:
 
 private:
 	bool quit;
-	SDL_Window *window;
-	SDL_Renderer *renderer;
+	Window *window;
 	SDL_Texture *grass_image;
 	SDL_Rect grass_rect;
 	SDL_Texture *bob_image;
 	SDL_Rect bob_rect;
-	SDL_Event main_event;
+	SDL_Event *main_event;
 };
 
