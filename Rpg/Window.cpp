@@ -12,19 +12,22 @@ Window::~Window()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 }
 
-void Window::init(bool *quit)
+void Window::init(int width, int height, bool *quit)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 
-	window = SDL_CreateWindow("RPG", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600,
+	window = SDL_CreateWindow("RPG", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
 		SDL_WINDOW_SHOWN);
 	if (window == nullptr)
 	{
 		cout << "Can't create window!\n";
 		*quit = true;
 	}
+	this->width = width;
+	this->height = height;
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == nullptr)
@@ -47,4 +50,14 @@ void Window::update()
 SDL_Renderer * Window::getRenderer()
 {
 	return renderer;
+}
+
+int Window::getWidth()
+{
+	return width;
+}
+
+int Window::getHeight()
+{
+	return height;
 }

@@ -19,7 +19,7 @@ CMain::~CMain()
 void CMain::init()
 {
 	window = new Window();
-	window->init(&quit);
+	window->init(800, 600, &quit);
 
 	grass = new Sprite();
 	if (!grass->load("data/grass.bmp", window->getRenderer()))
@@ -42,7 +42,7 @@ void CMain::gameLoop()
 	{
 		SDL_PollEvent(main_event);
 		window->clear();
-		grass->draw(0, 0, 800, 600, window->getRenderer());
+		grass->draw(0, 0, window->getWidth(), window->getHeight(), window->getRenderer());
 		bob->draw(100, 100, 100, 150, window->getRenderer());
 		window->update();
 	}
