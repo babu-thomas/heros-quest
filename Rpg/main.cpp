@@ -13,6 +13,9 @@ CMain::CMain() : quit(false), window(nullptr), main_event(nullptr), grass(nullpt
 
 CMain::~CMain()
 {
+	delete window;
+	delete grass;
+	delete bob;
 	delete main_event;
 }
 
@@ -32,18 +35,56 @@ void CMain::init()
 	{
 		quit = true;
 	}
+	grass->draw(0, 0, window->getWidth(), window->getHeight(), window->getRenderer());
+	bob->draw(100, 100, 100, 150, window->getRenderer());
 
 	main_event = new SDL_Event();
 }
 
 void CMain::gameLoop()
 {
-	while (!quit && main_event->type != SDL_QUIT)
+	const Uint8 *kb_state = SDL_GetKeyboardState(nullptr);
+	Uint32 old_time = SDL_GetTicks();
+	while (!quit)
 	{
-		SDL_PollEvent(main_event);
+		while (SDL_PollEvent(main_event))
+		{
+			switch (main_event->type)
+			{
+			case SDL_QUIT:
+				quit = true;
+				break;
+			default:
+				break;
+			}
+		}
+
+		Uint32 new_time = SDL_GetTicks();
+		Uint32 delta = new_time - old_time;
+		if (20 < delta)
+		{
+			if (kb_state[SDL_SCANCODE_W])
+			{
+				bob->moveUp();
+			}
+			if (kb_state[SDL_SCANCODE_S])
+			{
+				bob->moveDown();
+			}
+			if (kb_state[SDL_SCANCODE_A])
+			{
+				bob->moveLeft();
+			}
+			if (kb_state[SDL_SCANCODE_D])
+			{
+				bob->moveRight();
+			}
+			old_time = new_time;
+		}
+
 		window->clear();
-		grass->draw(0, 0, window->getWidth(), window->getHeight(), window->getRenderer());
-		bob->draw(100, 100, 100, 150, window->getRenderer());
+		grass->draw(window->getRenderer());
+		bob->draw(window->getRenderer());
 		window->update();
 	}
 }

@@ -5,12 +5,16 @@
 
 Sprite::Sprite() : texture(nullptr)
 {
+	rect = new SDL_Rect();
+	rect->x = rect->y = 0;
+	rect->w = rect->h = 100;
 }
 
 
 Sprite::~Sprite()
 {
 	SDL_DestroyTexture(texture);
+	delete rect;
 }
 
 bool Sprite::load(string file_name, SDL_Renderer *renderer)
@@ -24,10 +28,60 @@ bool Sprite::load(string file_name, SDL_Renderer *renderer)
 
 void Sprite::draw(int x, int y, int w, int h, SDL_Renderer *renderer)
 {
-	SDL_Rect rect;
-	rect.x = x;
-	rect.y = y;
-	rect.w = w;
-	rect.h = h;
-	SDL_RenderCopy(renderer, texture, nullptr, &rect);
+	rect->x = x;
+	rect->y = y;
+	rect->w = w;
+	rect->h = h;
+	SDL_RenderCopy(renderer, texture, nullptr, rect);
+}
+
+void Sprite::draw(SDL_Renderer *renderer)
+{
+	SDL_RenderCopy(renderer, texture, nullptr, rect);
+}
+
+void Sprite::setX(int x)
+{
+	rect->x = x;
+}
+
+void Sprite::setY(int y)
+{
+	rect->y = y;
+}
+
+void Sprite::setPosition(int x, int y)
+{
+	rect->x = x;
+	rect->y = y;
+}
+
+int Sprite::getX()
+{
+	return rect->x;
+}
+
+int Sprite::getY()
+{
+	return rect->y;
+}
+
+void Sprite::moveUp()
+{
+	rect->y -= 3;
+}
+
+void Sprite::moveDown()
+{
+	rect->y += 3;
+}
+
+void Sprite::moveRight()
+{
+	rect->x += 3;
+}
+
+void Sprite::moveLeft()
+{
+	rect->x -= 3;
 }
