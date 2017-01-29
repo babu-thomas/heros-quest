@@ -13,6 +13,7 @@ public:
 	void init();
 	void gameLoop();
 	void handleEvents();
+	double getDistance(int x1, int y1, int x2, int y2);
 
 private:
 	bool quit;

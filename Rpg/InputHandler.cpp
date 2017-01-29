@@ -23,6 +23,9 @@ void InputHandler::update(bool *quit)
 		case SDL_QUIT:
 			*quit = true;
 			break;
+		case SDL_MOUSEMOTION:
+			onMouseMove(event);
+			break;
 		default:
 			break;
 		}
@@ -35,4 +38,20 @@ bool InputHandler::isKeyDown(SDL_Scancode key)
 		return true;
 	else
 		return false;
+}
+
+void InputHandler::onMouseMove(SDL_Event event)
+{
+	mouse_x = event.motion.x;
+	mouse_y = event.motion.y;
+}
+
+int InputHandler::getMouseX()
+{
+	return mouse_x;
+}
+
+int InputHandler::getMouseY()
+{
+	return mouse_y;
 }

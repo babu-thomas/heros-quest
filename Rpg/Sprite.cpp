@@ -8,6 +8,7 @@ Sprite::Sprite() : texture(nullptr)
 	rect = new SDL_Rect();
 	rect->x = rect->y = 0;
 	rect->w = rect->h = 100;
+	origin_x = origin_y = 0;
 }
 
 
@@ -56,6 +57,22 @@ void Sprite::setPosition(int x, int y)
 	rect->y = y;
 }
 
+void Sprite::setOrigin(int x, int y)
+{
+	origin_x = x;
+	origin_y = y;
+}
+
+int Sprite::getOriginX()
+{
+	return origin_x;
+}
+
+int Sprite::getOriginY()
+{
+	return origin_y;
+}
+
 int Sprite::getX()
 {
 	return rect->x;
@@ -64,6 +81,26 @@ int Sprite::getX()
 int Sprite::getY()
 {
 	return rect->y;
+}
+
+int Sprite::getWidth()
+{
+	return rect->w;
+}
+
+int Sprite::getHeight()
+{
+	return rect->h;
+}
+
+void Sprite::setWidth(int w)
+{
+	rect->w = w;
+}
+
+void Sprite::setHeight(int h)
+{
+	rect->h = h;
 }
 
 void Sprite::moveUp()

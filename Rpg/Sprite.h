@@ -16,8 +16,15 @@ public:
 	void setX(int x);
 	void setY(int y);
 	void setPosition(int x, int y);
+	void setOrigin(int x, int y);
+	int getOriginX();
+	int getOriginY();
 	int	getX();
 	int getY();
+	int getWidth();
+	int getHeight();
+	void setWidth(int w);
+	void setHeight(int h);
 	void moveUp();
 	void moveDown();
 	void moveRight();
@@ -26,5 +33,7 @@ public:
 private:
 	SDL_Texture *texture;
 	SDL_Rect *rect;
+	int origin_x;
+	int origin_y;
 };
 

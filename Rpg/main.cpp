@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL_image.h>
+#include <cmath>
 #include "Main.h"
 
 using namespace std;
@@ -66,7 +67,23 @@ void CMain::gameLoop()
 void CMain::handleEvents()
 {
 	input_handler->update(&quit);
-	if (input_handler->isKeyDown(SDL_SCANCODE_W))
+	int bob_x = bob->getX();
+	int bob_y = bob->getY();
+	int mouse_x = input_handler->getMouseX();
+	int mouse_y = input_handler->getMouseY();
+	cout << mouse_x << " " << mouse_y << endl;
+	double distance = getDistance(bob_x, bob_y, mouse_x, mouse_y);
+
+	if (mouse_y < bob_y)
+		bob->moveUp();
+	if (bob_y < mouse_y)
+		bob->moveDown();
+	if (mouse_x < bob_x)
+		bob->moveLeft();
+	if (bob_x < mouse_x)
+		bob->moveRight();
+
+	/*if (input_handler->isKeyDown(SDL_SCANCODE_W))
 	{
 		bob->moveUp();
 	}
@@ -81,5 +98,13 @@ void CMain::handleEvents()
 	if (input_handler->isKeyDown(SDL_SCANCODE_D))
 	{
 		bob->moveRight();
-	}
+	}*/
+}
+
+double CMain::getDistance(int x1, int y1, int x2, int y2)
+{
+	double diff_x = x1 - x2;
+	double diff_y = y1 - y2;
+	double distance = sqrt(diff_x * diff_x + diff_y * diff_y);
+	return distance;
 }
