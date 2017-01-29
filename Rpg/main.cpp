@@ -6,7 +6,8 @@ using namespace std;
 
 
 
-CMain::CMain() : quit(false), window(nullptr), main_event(nullptr), grass(nullptr), bob(nullptr)
+CMain::CMain() : quit(false), window(nullptr), main_event(nullptr), grass(nullptr), bob(nullptr),
+	input_handler(nullptr)
 {
 }
 
@@ -39,46 +40,19 @@ void CMain::init()
 	bob->draw(100, 100, 100, 150, window->getRenderer());
 
 	main_event = new SDL_Event();
+	input_handler = new InputHandler();
 }
 
 void CMain::gameLoop()
 {
-	const Uint8 *kb_state = SDL_GetKeyboardState(nullptr);
 	Uint32 old_time = SDL_GetTicks();
 	while (!quit)
 	{
-		while (SDL_PollEvent(main_event))
-		{
-			switch (main_event->type)
-			{
-			case SDL_QUIT:
-				quit = true;
-				break;
-			default:
-				break;
-			}
-		}
-
 		Uint32 new_time = SDL_GetTicks();
 		Uint32 delta = new_time - old_time;
 		if (20 < delta)
 		{
-			if (kb_state[SDL_SCANCODE_W])
-			{
-				bob->moveUp();
-			}
-			if (kb_state[SDL_SCANCODE_S])
-			{
-				bob->moveDown();
-			}
-			if (kb_state[SDL_SCANCODE_A])
-			{
-				bob->moveLeft();
-			}
-			if (kb_state[SDL_SCANCODE_D])
-			{
-				bob->moveRight();
-			}
+			handleEvents();
 			old_time = new_time;
 		}
 
@@ -86,5 +60,26 @@ void CMain::gameLoop()
 		grass->draw(window->getRenderer());
 		bob->draw(window->getRenderer());
 		window->update();
+	}
+}
+
+void CMain::handleEvents()
+{
+	input_handler->update(&quit);
+	if (input_handler->isKeyDown(SDL_SCANCODE_W))
+	{
+		bob->moveUp();
+	}
+	if (input_handler->isKeyDown(SDL_SCANCODE_S))
+	{
+		bob->moveDown();
+	}
+	if (input_handler->isKeyDown(SDL_SCANCODE_A))
+	{
+		bob->moveLeft();
+	}
+	if (input_handler->isKeyDown(SDL_SCANCODE_D))
+	{
+		bob->moveRight();
 	}
 }
