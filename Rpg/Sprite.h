@@ -13,14 +13,14 @@ public:
 	bool load(string file_name, SDL_Renderer *renderer);
 	void draw(int x, int y, int w, int h, SDL_Renderer *renderer);
 	void draw(SDL_Renderer *renderer);
-	void setX(int x);
-	void setY(int y);
-	void setPosition(int x, int y);
-	void setOrigin(int x, int y);
-	int getOriginX();
-	int getOriginY();
-	int	getX();
-	int getY();
+	void setX(double x);
+	void setY(double y);
+	void setPosition(double x, double y);
+	void setOrigin(double x, double y);
+	double getOriginX();
+	double getOriginY();
+	double getX();
+	double getY();
 	int getWidth();
 	int getHeight();
 	void setWidth(int w);
@@ -33,7 +33,9 @@ public:
 private:
 	SDL_Texture *texture;
 	SDL_Rect *rect;
-	int origin_x;
-	int origin_y;
+	double x_pos;
+	double y_pos;
+	double origin_x;
+	double origin_y;
 };
 

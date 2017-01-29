@@ -31,14 +31,15 @@ void CMain::init()
 	{
 		quit = true;
 	}
+	grass->draw(0, 0, window->getWidth(), window->getHeight(), window->getRenderer());
 
 	bob = new Sprite();
 	if (!bob->load("data/bob.png", window->getRenderer()))
 	{
 		quit = true;
 	}
-	grass->draw(0, 0, window->getWidth(), window->getHeight(), window->getRenderer());
 	bob->draw(100, 100, 100, 150, window->getRenderer());
+	bob->setOrigin(bob->getWidth() / 2.0, bob->getHeight());
 
 	main_event = new SDL_Event();
 	input_handler = new InputHandler();
@@ -67,38 +68,24 @@ void CMain::gameLoop()
 void CMain::handleEvents()
 {
 	input_handler->update(&quit);
-	int bob_x = bob->getX();
-	int bob_y = bob->getY();
+	double bob_x = bob->getX();
+	double bob_y = bob->getY();
 	int mouse_x = input_handler->getMouseX();
 	int mouse_y = input_handler->getMouseY();
 	cout << mouse_x << " " << mouse_y << endl;
+
 	double distance = getDistance(bob_x, bob_y, mouse_x, mouse_y);
-
-	if (mouse_y < bob_y)
-		bob->moveUp();
-	if (bob_y < mouse_y)
-		bob->moveDown();
-	if (mouse_x < bob_x)
-		bob->moveLeft();
-	if (bob_x < mouse_x)
-		bob->moveRight();
-
-	/*if (input_handler->isKeyDown(SDL_SCANCODE_W))
+	if (distance != 0)
 	{
-		bob->moveUp();
+		if (mouse_y < bob_y)
+			bob->setY(bob_y - (bob_y - mouse_y) / distance * 2.5);
+		if (bob_y < mouse_y)
+			bob->setY(bob_y - (bob_y - mouse_y) / distance * 2.5);
+		if (mouse_x < bob_x)
+			bob->setX(bob_x - (bob_x - mouse_x) / distance * 2.5);
+		if (bob_x < mouse_x)
+			bob->setX(bob_x - (bob_x - mouse_x) / distance * 2.5);
 	}
-	if (input_handler->isKeyDown(SDL_SCANCODE_S))
-	{
-		bob->moveDown();
-	}
-	if (input_handler->isKeyDown(SDL_SCANCODE_A))
-	{
-		bob->moveLeft();
-	}
-	if (input_handler->isKeyDown(SDL_SCANCODE_D))
-	{
-		bob->moveRight();
-	}*/
 }
 
 double CMain::getDistance(int x1, int y1, int x2, int y2)

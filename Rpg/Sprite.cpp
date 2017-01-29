@@ -8,7 +8,8 @@ Sprite::Sprite() : texture(nullptr)
 	rect = new SDL_Rect();
 	rect->x = rect->y = 0;
 	rect->w = rect->h = 100;
-	origin_x = origin_y = 0;
+	origin_x = origin_y = 0.0;
+	x_pos = y_pos = 0.0;
 }
 
 
@@ -33,6 +34,10 @@ void Sprite::draw(int x, int y, int w, int h, SDL_Renderer *renderer)
 	rect->y = y;
 	rect->w = w;
 	rect->h = h;
+
+	x_pos = x;
+	y_pos = y;
+
 	SDL_RenderCopy(renderer, texture, nullptr, rect);
 }
 
@@ -41,46 +46,51 @@ void Sprite::draw(SDL_Renderer *renderer)
 	SDL_RenderCopy(renderer, texture, nullptr, rect);
 }
 
-void Sprite::setX(int x)
+void Sprite::setX(double x)
 {
-	rect->x = x;
+	x_pos = x;
+	rect->x = int(x_pos - origin_x);
 }
 
-void Sprite::setY(int y)
+void Sprite::setY(double y)
 {
-	rect->y = y;
+	y_pos = y;
+	rect->y = int(y_pos - origin_y);
 }
 
-void Sprite::setPosition(int x, int y)
+void Sprite::setPosition(double x, double y)
 {
-	rect->x = x;
-	rect->y = y;
+	x_pos = x;
+	y_pos = y;
+
+	rect->x = int(x_pos - origin_x);
+	rect->y = int(y_pos - origin_y);
 }
 
-void Sprite::setOrigin(int x, int y)
+void Sprite::setOrigin(double x, double y)
 {
 	origin_x = x;
 	origin_y = y;
 }
 
-int Sprite::getOriginX()
+double Sprite::getOriginX()
 {
 	return origin_x;
 }
 
-int Sprite::getOriginY()
+double Sprite::getOriginY()
 {
 	return origin_y;
 }
 
-int Sprite::getX()
+double Sprite::getX()
 {
-	return rect->x;
+	return x_pos;
 }
 
-int Sprite::getY()
+double Sprite::getY()
 {
-	return rect->y;
+	return y_pos;
 }
 
 int Sprite::getWidth()
