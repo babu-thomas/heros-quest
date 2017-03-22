@@ -178,8 +178,13 @@ int Sprite::getFramesY()
 void Sprite::playAnimation(int begin_frame, int end_frame, int row, float speed)
 {
 	unsigned int ticks = SDL_GetTicks();
-	int current_delay = float(animation_delay / speed) + 0.5;
-	current_frame = (ticks / current_delay) % (end_frame + 1);
+	int current_frame = begin_frame;
+
+	if(begin_frame != end_frame)
+	{
+		int current_delay = float(animation_delay / speed) + 0.5;
+		current_frame = (ticks / current_delay) % (end_frame + 1);
+	}
 
 	crop->x = current_frame * (image_width / frames_x);
 	crop->y = row * (image_height / frames_y);

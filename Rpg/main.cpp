@@ -90,38 +90,39 @@ void CMain::handleEvents()
 	double angle_rad = atan2(follow_point_y - player->getY(), follow_point_x - player->getX());
 	double angle_deg = angle_rad * (180 / M_PI) + 180;
 
-	double distance = getDistance(player_x, player_y, follow_point_x, follow_point_y);
+	double distance = getDistance(int(player_x), int(player_y), follow_point_x, follow_point_y);
 	if (follow)
 	{
-		if (45 < angle_deg && angle_deg <= 135)
-		{
-			//Up
-			player->playAnimation(0, 3, 3, 1);
-		}
-		else if (135 < angle_deg && angle_deg <= 225)
-		{
-			//Right
-			player->playAnimation(0, 3, 2, 1);
-		}
-		else if (225 < angle_deg && angle_deg <= 315)
-		{
-			//Down
-			player->playAnimation(0, 3, 0, 1);
-		}
-		else
-		{
-			//Left
-			player->playAnimation(0, 3, 1, 1);
-		}
-		
-		if (distance > 2)
-		{
-			player->setY(player_y - (player_y - follow_point_y) / distance * 3.0);
-			player->setX(player_x - (player_x - follow_point_x) / distance * 3.0);
-		}
-		else
+		if (distance < 3)
 		{
 			follow = false;
+			player->playAnimation(1, 1, 0, 1);
+		}
+		else
+		{
+			if (45 < angle_deg && angle_deg <= 135)
+			{
+				//Up
+				player->playAnimation(0, 3, 3, 1);
+			}
+			else if (135 < angle_deg && angle_deg <= 225)
+			{
+				//Right
+				player->playAnimation(0, 3, 2, 1);
+			}
+			else if (225 < angle_deg && angle_deg <= 315)
+			{
+				//Down
+				player->playAnimation(0, 3, 0, 1);
+			}
+			else
+			{
+				//Left
+				player->playAnimation(0, 3, 1, 1);
+			}
+
+				player->setY(player_y - (player_y - follow_point_y) / distance * 3.0);
+				player->setX(player_x - (player_x - follow_point_x) / distance * 3.0);
 		}
 	}
 }
