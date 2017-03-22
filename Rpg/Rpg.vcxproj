@@ -129,6 +129,10 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\grass.bmp" />
+    <Image Include="data\tom.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

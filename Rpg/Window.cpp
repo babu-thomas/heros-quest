@@ -17,7 +17,7 @@ Window::~Window()
 
 void Window::init(int width, int height, bool *quit)
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_EVERYTHING);
 
 	window = SDL_CreateWindow("RPG", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
 		SDL_WINDOW_SHOWN);

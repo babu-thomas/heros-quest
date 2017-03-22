@@ -17,9 +17,12 @@ public:
 
 private:
 	bool quit;
+	bool follow;
+	int follow_point_x;
+	int follow_point_y;
 	Window *window;
 	Sprite *grass;
-	Sprite *bob;
+	Sprite *player;
 	SDL_Event *main_event;
 	InputHandler *input_handler;
 
