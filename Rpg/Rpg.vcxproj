@@ -128,17 +128,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="rpg.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="src\InputHandler.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\rpg.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="src\InputHandler.h" />
+    <ClInclude Include="src\Main.h" />
+    <ClInclude Include="src\Sprite.h" />
+    <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\grass.bmp" />
